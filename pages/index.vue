@@ -4,14 +4,29 @@
       <h1>An aggregate of interesting articles from around the web</h1>
       <p>It's {{ date }}</p>
     </div>
-    <div class="post-grid">
-      <Thumb :id="id" />
+    <div class="post-grid" v-if="posts">
+      <Thumb :data="posts[0]" :isPrimary="true" />
+      <Thumb :data="posts[1]" :isPrimary="true" />
+      <Thumb v-for="post in posts.slice(2)" :data="post" :key="post.Id" />
     </div>
   </main>
 </template>
 
 <script>
 export default {
+  data() {
+    return {
+      posts: null,
+      page: 1,
+    };
+  },
+  mounted() {
+    fetch(`/api/get?page=${this.page}`)
+      .then((res) => res.json())
+      .then((data) => {
+        this.posts = data;
+      });
+  },
   computed: {
     date() {
       return new Date().toLocaleDateString("en-US", {
@@ -46,7 +61,7 @@ export default {
   content: "";
   position: absolute;
   background-color: #ff3a3a;
-  background-image: url("background.png");
+  background-image: url("/background.png");
   background-size: cover;
   background-position: center;
   z-index: -1;
@@ -70,9 +85,17 @@ p {
 
 .post-grid {
   padding: 1rem;
-  display: grid;
-  grid-template-columns: 1fr 0.5fr;
-  max-width: 800px;
+  display: flex;
+  max-width: 1200px;
+  width: 90vw;
   margin: auto;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+@media only screen and (max-width: 800px) {
+  h1 {
+    font-size: 1.75rem;
+  }
 }
 </style>

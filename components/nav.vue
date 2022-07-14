@@ -1,11 +1,12 @@
 <template>
   <nav>
-    <img src="logo.svg" alt="Logo" />
-    <h2>Frigidus</h2>
+    <img src="/logo.svg" alt="Logo" />
+    <NuxtLink to="/" class="logo">
+      <h2 @click="$router.push('/')">Frigidus</h2>
+    </NuxtLink>
     <div class="spacer"></div>
-    <a href="#">About</a>
-    <a href="#">Categories</a>
-    <a href="#" class="button">Write</a>
+    <NuxtLink to="admin">Admin</NuxtLink>
+    <a href="#" class="button">Submit</a>
   </nav>
 </template>
 
@@ -42,12 +43,13 @@ a {
   font-weight: 300;
   text-decoration: none;
   opacity: 0.8;
-  margin-left: 3vw;
+  transition: 200ms;
+  margin-left: 1rem;
 }
 
 a.button {
   margin-right: 1.5rem;
-  margin-left: calc(3vw - 0.5rem);
+  margin-left: 1.5rem;
   border: 1px solid #ffffff;
   padding: 0.5rem 1rem;
   border-radius: 0.2rem;
@@ -57,5 +59,10 @@ a.button:hover {
   background: #ffffff;
   color: #0c343d;
   font-weight: 400;
+}
+
+.logo {
+  margin-left: 0;
+  opacity: 1;
 }
 </style>

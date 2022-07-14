@@ -12,18 +12,11 @@ export default defineEventHandler((event) => {
       ssl: { rejectUnauthorized: true },
     });
     if (
-      query.name &&
-      query.url &&
+      query.id &&
+      parseInt(query?.id) &&
       atob(event.req.headers["x-token"]) == process.env.ADMIN_PASSWORD
     ) {
-      await connection.execute(
-        `INSERT INTO Stories (Id, Name, Url, DateAdded) VALUES (NULL, "${decodeURIComponent(
-          query.name
-        )}", "${decodeURIComponent(query.url)}", "${new Date()
-          .toISOString()
-          .slice(0, 19)
-          .replace("T", " ")}")`
-      );
+      await connection.execute(`DELETE FROM Stories WHERE Id=${query.id}`);
       return true;
     } else {
       return false;
