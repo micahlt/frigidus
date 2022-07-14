@@ -1,5 +1,10 @@
 <template>
-  <a :class="{ thumb: true, big: isPrimary }" :href="data.Url">
+  <a
+    :class="{ thumb: true, big: isPrimary }"
+    :href="data.Url"
+    target="_blank"
+    rel="noreferrer"
+  >
     <img :src="openGraphImage" />
     <h3>{{ data.Name }}</h3>
     <p class="info">
@@ -47,6 +52,7 @@ export default {
 h3 {
   font-size: 1.4rem;
   transition: 200ms;
+  margin-right: 5%;
 }
 
 img {
@@ -62,6 +68,8 @@ img {
   display: block;
   position: relative;
   margin-bottom: 1rem;
+  transition: 200ms;
+  will-change: filter;
 }
 
 img::before {
@@ -103,19 +111,24 @@ img::after {
 }
 
 .thumb {
-  width: 300px;
+  width: 29%;
   padding: 1rem;
+  min-width: 300px;
   display: block;
   color: initial;
   text-decoration: none;
 }
 
 .thumb.big {
-  width: 500px;
+  width: 47%;
 }
 
 .thumb:hover h3 {
   color: #ff3a3a;
+}
+
+.thumb:hover img {
+  filter: saturate(0.4);
 }
 
 .info {
@@ -127,7 +140,7 @@ img::after {
 
 @media only screen and (max-width: 1190px) {
   .thumb.big {
-    width: 300px;
+    width: 29%;
   }
 }
 </style>

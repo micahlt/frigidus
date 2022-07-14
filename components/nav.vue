@@ -1,14 +1,22 @@
 <template>
-  <nav>
-    <img src="/logo.svg" alt="Logo" />
+  <nav :class="{ stickied }">
     <NuxtLink to="/" class="logo">
+      <img src="/logo.svg" alt="Logo" />
       <h2 @click="$router.push('/')">Frigidus</h2>
     </NuxtLink>
     <div class="spacer"></div>
     <NuxtLink to="admin">Admin</NuxtLink>
-    <a href="#" class="button">Submit</a>
+    <a href="https://micahlindley.com/" class="button" target="_blank">More</a>
   </nav>
 </template>
+
+<script>
+export default {
+  props: {
+    stickied: Boolean,
+  },
+};
+</script>
 
 <style scoped>
 nav {
@@ -26,6 +34,11 @@ nav {
   display: flex;
   align-items: center;
   z-index: 999;
+  transition: 0.2s;
+}
+
+.stickied {
+  background: #ff3a3a;
 }
 
 img {
@@ -64,5 +77,7 @@ a.button:hover {
 .logo {
   margin-left: 0;
   opacity: 1;
+  display: flex;
+  align-items: center;
 }
 </style>

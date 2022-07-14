@@ -1,7 +1,7 @@
 <template>
   <main>
     <div class="header">
-      <h1>An aggregate of interesting articles from around the web</h1>
+      <h1>An aggregate of interesting tech articles from around the web</h1>
       <p>It's {{ date }}</p>
     </div>
     <div class="post-grid" v-if="posts">
@@ -21,7 +21,11 @@ export default {
     };
   },
   mounted() {
-    fetch(`/api/get?page=${this.page}`)
+    fetch(`/api/get?page=${this.page}`, {
+      method: "GET",
+      credentials: "include",
+      mode: "no-cors",
+    })
       .then((res) => res.json())
       .then((data) => {
         this.posts = data;
@@ -90,12 +94,18 @@ p {
   width: 90vw;
   margin: auto;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-between;
 }
 
 @media only screen and (max-width: 800px) {
   h1 {
     font-size: 1.75rem;
+  }
+}
+
+@media only screen and (max-width: 1110px) {
+  .post-grid {
+    justify-content: center;
   }
 }
 </style>
