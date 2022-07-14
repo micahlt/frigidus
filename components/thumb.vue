@@ -45,14 +45,14 @@ export default {
 </script>
 
 <style scoped>
-.big h3 {
-  font-size: 1.75rem;
-}
-
 h3 {
   font-size: 1.4rem;
   transition: 200ms;
   margin-right: 5%;
+}
+
+.big h3 {
+  font-size: 1.75rem;
 }
 
 img {
@@ -138,9 +138,13 @@ img::after {
   margin-top: 0.25rem;
 }
 
-@media only screen and (max-width: 1190px) {
+@media only screen and (max-width: 1200px) {
   .thumb.big {
     width: 29%;
+  }
+
+  .big h3 {
+    font-size: 1.4rem;
   }
 }
 </style>
