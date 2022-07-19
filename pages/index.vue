@@ -4,12 +4,19 @@
       <h1>An aggregate of interesting tech articles from around the web</h1>
       <p>It's {{ date }}</p>
     </div>
-    <div class="post-grid" v-if="posts">
+    <div class="post-grid" v-if="posts.length > 3">
       <Thumb :data="posts[0]" :isPrimary="true" />
       <Thumb :data="posts[1]" :isPrimary="true" />
       <Thumb v-for="post in posts.slice(2)" :data="post" :key="post.Id" />
     </div>
-    <a href="#" role="button" class="more">Load more</a>
+    <a
+      v-if="!lastPage && posts.length > 3"
+      @click.prevent="fetchStories"
+      href="#"
+      role="button"
+      class="more"
+      >Load more</a
+    >
   </main>
 </template>
 
@@ -17,23 +24,35 @@
 export default {
   data() {
     return {
-      posts: null,
+      posts: [],
       page: 1,
+      lastPage: false,
     };
   },
   mounted() {
-    fetch(`/api/get?page=${this.page}`, {
-      method: "GET",
-      credentials: "include",
-      mode: "no-cors",
-      headers: {
-        "Cache-Control": "s-maxage=600",
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        this.posts = data;
-      });
+    this.fetchStories();
+  },
+  methods: {
+    fetchStories() {
+      fetch(`/api/get?page=${this.page}`, {
+        method: "GET",
+        credentials: "include",
+        mode: "no-cors",
+        headers: {
+          "Cache-Control": "s-maxage=600",
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          data.forEach((datum) => {
+            this.posts.push(datum);
+          });
+          this.page++;
+          if (data.length < 11) {
+            this.lastPage = true;
+          }
+        });
+    },
   },
   computed: {
     date() {

@@ -28,7 +28,11 @@ export default {
     };
   },
   mounted() {
-    fetch(`/api/og?url=${encodeURIComponent(this.data.Url)}`)
+    fetch(`/api/og?url=${encodeURIComponent(this.data.Url)}`, {
+      headers: {
+        "Cache-Control": "s-maxage=1600",
+      },
+    })
       .then((res) => res.json())
       .then((data) => {
         if (data.image) {
