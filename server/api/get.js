@@ -13,8 +13,8 @@ export default defineEventHandler((event) => {
     });
     if (parseInt(q.page)) {
       const [res] = await connection.query(
-        `SELECT * FROM Stories ORDER BY Id DESC LIMIT 10 OFFSET ${Number(
-          (q.page - 1) * 10
+        `SELECT * FROM Stories ORDER BY Id DESC LIMIT 11 OFFSET ${Number(
+          (q.page - 1) * 11
         )}`
       );
       return res;

@@ -9,6 +9,7 @@
       <Thumb :data="posts[1]" :isPrimary="true" />
       <Thumb v-for="post in posts.slice(2)" :data="post" :key="post.Id" />
     </div>
+    <a href="#" role="button" class="more">Load more</a>
   </main>
 </template>
 
@@ -25,6 +26,9 @@ export default {
       method: "GET",
       credentials: "include",
       mode: "no-cors",
+      headers: {
+        "Cache-Control": "s-maxage=600",
+      },
     })
       .then((res) => res.json())
       .then((data) => {
@@ -45,6 +49,11 @@ export default {
 </script>
 
 <style scoped>
+main {
+  text-align: center;
+  padding-bottom: 2rem;
+}
+
 .header {
   height: 40vh;
   padding-top: 2rem;
@@ -95,6 +104,15 @@ p {
   margin: auto;
   flex-wrap: wrap;
   justify-content: space-between;
+}
+
+.more {
+  background: #ff3a3a;
+  color: white;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  margin-bottom: 1rem;
 }
 
 @media only screen and (max-width: 800px) {

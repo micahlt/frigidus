@@ -33,6 +33,8 @@ export default {
       .then((data) => {
         if (data.image) {
           this.openGraphImage = data.image;
+        } else {
+          this.openGraphImage = "/placeholder-image.png";
         }
       });
   },
@@ -117,6 +119,7 @@ img::after {
   display: block;
   color: initial;
   text-decoration: none;
+  text-align: left;
 }
 
 .thumb.big {
