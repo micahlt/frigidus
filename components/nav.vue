@@ -80,4 +80,10 @@ a.button:hover {
   display: flex;
   align-items: center;
 }
+
+@media only screen and (max-width: 800px) {
+  .logo h2 {
+    display: none;
+  }
+}
 </style>
