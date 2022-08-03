@@ -118,7 +118,8 @@ export default {
       )
         .then((res) => res.text())
         .then((data) => {
-          if (data == false) {
+          console.log("Data", data);
+          if (data == "false") {
             alert("Try again.");
           } else {
             window.location.reload();
@@ -145,6 +146,11 @@ export default {
 </script>
 
 <style scoped>
+.manager {
+  max-width: 100vw;
+  overflow-y: auto;
+  padding: 1rem;
+}
 .header {
   height: 20vh;
   padding-top: 2rem;
