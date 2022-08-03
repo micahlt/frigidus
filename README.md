@@ -1,42 +1,15 @@
-# Nuxt 3 Minimal Starter
+# Frigidus
 
-Look at the [nuxt 3 documentation](https://v3.nuxtjs.org) to learn more.
+[Frigidus](https://frigidus.micahlindley.com) is an aggregate site of interesting tech articles from around the web.  It's powered by [Nuxt 3](https://v3.nuxtjs.org) + [Vue 3](https://vuejs.org) and hosted on [Vercel](https://vercel.com).
 
-## Setup
-
-Make sure to install the dependencies:
-
-```bash
-# yarn
-yarn install
-
-# npm
-npm install
-
-# pnpm
-pnpm install --shamefully-hoist
-```
-
-## Development Server
-
-Start the development server on http://localhost:3000
+## Running
 
 ```bash
 npm run dev
 ```
 
-## Production
-
-Build the application for production:
+## Building
 
 ```bash
 npm run build
 ```
-
-Locally preview production build:
-
-```bash
-npm run preview
-```
-
-Checkout the [deployment documentation](https://v3.nuxtjs.org/guide/deploy/presets) for more information.
