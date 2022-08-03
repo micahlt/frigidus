@@ -1,6 +1,6 @@
 import "dotenv/config";
 import mysql from "mysql2/promise";
-import og from "opengraph-fetcher";
+import ogs from "open-graph-scraper";
 import { Wasteof2Auth } from "wasteof-client";
 
 export default defineEventHandler((event) => {
@@ -22,16 +22,16 @@ export default defineEventHandler((event) => {
         "frigidus",
         process.env.WASTEOF_PASSWORD
       );
-      const linkData = await og.fetch(query.url, async (g) => {
-        return g;
-      });
+      const linkData = await ogs({ url: query.url }).then(
+        (data) => data.result
+      );
       await wasteof.login();
       await wasteof.post(
         `<p>Check out this new article on Frigidus, your tech news aggregate: <b>${
           query.name
         }</b></p><p><em>${
-          (await linkData.description) ? await linkData.description : ""
-        }</em>.  Read more on frigidus.micahlindley.com</p>`,
+          (await linkData.ogDescription) ? await linkData.ogDescription : ""
+        }</em></p><p>Read more on frigidus.micahlindley.com</p>`,
         null
       );
       const db = await connection.execute(
